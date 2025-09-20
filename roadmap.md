@@ -1,0 +1,22 @@
+
+
+- [ ] LLM class
+    - chat completion
+    - multi-turn conversation
+    - sampling parameters
+    - multimodality (images)
+- [ ] Tool calling
+- [ ] Agent class
+- [ ] Structured outputs
+- [ ]
+- [ ]
+- [ ] Pre built agents
+- [ ] MCP support
+- [ ] Guard rails
+- [ ] Memory
+    - short term
+    - long term
+- [ ]
+- [ ]
+- [ ]
+- [ ]
