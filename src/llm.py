@@ -13,17 +13,16 @@ class LLM():
         *,
         default_system_prompt: bool = False,
         options: Options = None,
+        context_length: int = 4096,
         temperature: float = 0.7,
         top_p: float = 0.9,
         top_k: int = 40,
-        frequency_penalty: float = 0.5,
-        presence_penalty: float = 0.5,
-        repetition_penalty: float = 1.2,
-        max_tokens: int = 1024,
+        max_tokens: int = -1,
         ):
 
-        ollama.list() # List all available models
-        if model_name not in ollama.list():
+        # Check model availability
+        available_model_names = [x.model for x in ollama.list().models]
+        if not any([(model.startswith(model_name)) for model in available_model_names]):
             raise ValueError(f"Model {model_name} not found. Use 'ollama pull <model_name>' to pull the model.")
 
 
@@ -38,13 +37,11 @@ class LLM():
             self.options = options
         else:
             self.options = Options(
-            temperature=temperature,
-            top_p=top_p,
-            top_k=top_k,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty,
-            repetition_penalty=repetition_penalty,
-            max_tokens=max_tokens,
+                num_ctx=context_length,
+                temperature=temperature,
+                top_p=top_p,
+                top_k=top_k,
+                num_predict=max_tokens
         )
 
         # System prompt
@@ -85,6 +82,18 @@ class LLM():
 
 if __name__ == "__main__":
 
-    llm = LLM("llama3.2", default_system_prompt=True)
-    print(llm.generate("Hello my name is Bob and I am 30 years old. My favourite color is blue."))
-    print(llm.generate("Recommended me a good jacket. What color should the jacket be?"))
+    print("Running main")
+
+    # # Multi conversation
+    # llm = LLM("llama3.2", default_system_prompt=True)
+    # print(llm.generate("Hello my name is Bob and I am 30 years old. My favourite color is blue."))
+    # print(llm.generate("Recommended me a good jacket. What color should the jacket be?"))
+
+    # # Options
+    # options = Options(num_ctx=1024, temperature=0.9)
+    # llm = LLM("llama3.2", default_system_prompt=True, options=options)
+    # print(llm.generate("Give me a 3 sentence poem about boats and the color blue"))
+
+    # # Custom options
+    # llm = LLM("llama3.2", default_system_prompt=True, context_length=1024, temperature=0)
+    # print(llm.generate("What is the capital of France, Sweden and Germany?"))
