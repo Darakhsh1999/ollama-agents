@@ -1,8 +1,8 @@
 
 
 - [ ] LLM class
-    - chat completion
-    - multi-turn conversation
+    - chat completion [X]
+    - multi-turn conversation [X]
     - sampling parameters
     - multimodality (images)
 - [ ] Tool calling
