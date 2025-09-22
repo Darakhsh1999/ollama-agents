@@ -5,7 +5,7 @@
     - multi-turn conversation [X]
     - sampling parameters [X]
     - multimodality (images)
-- [ ] Tool calling
+- [X] Tool calling
 - [ ] Agent class
 - [ ] Structured outputs
 - [ ] Pre built agents
@@ -14,7 +14,3 @@
 - [ ] Memory
     - short term
     - long term
-- [ ]
-- [ ]
-- [ ]
-- [ ]
