@@ -6,7 +6,7 @@
     - sampling parameters [X]
     - multimodality (images)
 - [X] Tool calling
-- [ ] Agent class
+- [X] Agent class
 - [ ] Structured outputs
 - [ ] Pre built agents
 - [ ] MCP support

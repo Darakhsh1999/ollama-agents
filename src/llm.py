@@ -8,6 +8,7 @@ class LLM():
         self,
         model_name: str,
         *,
+        use_thinking: bool = False,
         options: Options = None,
         context_length: int = 4096,
         temperature: float = 0.7,
@@ -25,6 +26,14 @@ class LLM():
         self.model_name = model_name
         self.client = ollama.Client()
         self.capabilities = ollama.show(model_name).capabilities
+        print(self.capabilities)
+
+        # Reasoning
+        if "thinking" in self.capabilities:
+            self.use_thinking = use_thinking
+        else:
+            print(f"Warning: Model {model_name} does not support reasoning. Setting use_thinking to False")
+            self.use_thinking = False
 
         # Model sampling parmeters
         if options:
@@ -46,6 +55,7 @@ class LLM():
             messages=messages,
             options=self.options,
             tools=tools,
+            think=self.use_thinking,
         )
 
 
@@ -69,8 +79,11 @@ if __name__ == "__main__":
     # print(llm.generate("What is the capital of France, Sweden and Germany?"))
 
 
-    # Tool calling
-    def get_weather(city: str) -> str:
-        return f"The weather in {city} is currently sunny."
-    llm = LLM("llama3.2", default_system_prompt=True, tools=[get_weather])
-    print(llm.generate("What is the weather in Stockholm at this moment?"))
+    # # Tool calling
+    # def get_weather(city: str) -> str:
+    #     return f"The weather in {city} is currently sunny."
+    # llm = LLM("llama3.2", default_system_prompt=True, tools=[get_weather])
+    # print(llm.generate("What is the weather in Stockholm at this moment?"))
+
+    llm1 = LLM("llama3.2", use_thinking=True)
+    llm2 = LLM("qwen3:4b", use_thinking=True)
