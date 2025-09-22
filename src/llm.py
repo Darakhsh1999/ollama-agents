@@ -20,7 +20,7 @@ class LLM():
         # Check model availability
         available_model_names = [x.model for x in ollama.list().models]
         if not any([(model.startswith(model_name)) for model in available_model_names]):
-            raise ValueError(f"Model {model_name} not found. Use 'ollama pull <model_name>' to pull the model.")
+            raise ValueError(f"Model {model_name} not found. Use 'ollama pull <model_name>' to pull specific model.\nAvailable local models:\n- {"\n- ".join(available_model_names)}")
 
         # Ollama Client
         self.model_name = model_name
@@ -84,6 +84,7 @@ if __name__ == "__main__":
     # llm = LLM("llama3.2", default_system_prompt=True, tools=[get_weather])
     # print(llm.generate("What is the weather in Stockholm at this moment?"))
 
+    llm0 = LLM("ldiwoanoinlama3.2", use_thinking=True)
     llm1 = LLM("llama3.2", use_thinking=True)
     llm2 = LLM("qwen3:4b", use_thinking=True)
     llm2 = LLM("gemma3", use_thinking=True)
