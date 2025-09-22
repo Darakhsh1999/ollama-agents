@@ -1,5 +1,55 @@
 import os
 
+def addition(a: int, b: int) -> int:
+    """
+    Return the sum of two integers.
+
+    Args:
+        a (int): The first integer.
+        b (int): The second integer.
+    Returns:
+        int: The sum of a and b.
+    """
+    return a + b
+
+def subtraction(a: int, b: int) -> int:
+    """
+    Return the difference between two integers.
+
+    Args:
+        a (int): The number to subtract from.
+        b (int): The number to subtract.
+    Returns:
+        int: The result of a minus b.
+    """
+    return a - b
+
+def multiplication(a: int, b: int) -> int:
+    """
+    Return the product of two integers.
+
+    Args:
+        a (int): The first integer.
+        b (int): The second integer.
+    Returns:
+        int: The product of a and b.
+    """
+    return a * b
+
+def division(a: int, b: int) -> float:
+    """
+    Return the quotient of two integers as a float.
+
+    Args:
+        a (int): The dividend.
+        b (int): The divisor (must not be zero).
+    Returns:
+        float: The result of a divided by b.
+    Raises:
+        ZeroDivisionError: If b is zero.
+    """
+    return a / b
+
 def read_file(file_path: str) -> str:
     with open(file_path, "r") as f:
         text = f.read()
