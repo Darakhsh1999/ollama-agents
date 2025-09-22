@@ -1,6 +1,7 @@
 from llm import LLM
 from ollama import ChatResponse
 from default_prompts import AGENT_PROMPT
+from typing import Callable
 
 class Agent():
 
@@ -21,6 +22,8 @@ class Agent():
         self.verbose = verbose
         self.n_max_steps = n_max_steps
         self.messages: list[dict[str, str]] = []
+        self.tools: list[Callable] = []
+        
 
         # System prompt
         if system_prompt:
@@ -33,10 +36,13 @@ class Agent():
             self.bind_tools(tools)
         else:
             self.tools = []
-            self.available_tools = {}
+            self.available_tools: dict[str, Callable] = {}
 
 
     def bind_tools(self, tools: list):
+
+        if "tools" not in self.llm.capabilities:
+            raise ValueError(f"Model {self.llm.model_name} does not support tool/function calling")
 
         assert isinstance(tools, list), f"Tools must be a list but got {type(tools)}"
         assert all(callable(tool) for tool in tools), "All tools must be callable"
@@ -51,22 +57,33 @@ class Agent():
         return self.llm.generate(self.messages, self.tools)
 
 
-    def invoke(self, prompt: str) -> str:
+    def invoke(self, prompt: str, *, images: list[bytes] = None) -> str:
 
         # Initial user message
-        self.messages.append({"role": "user", "content": prompt})
+        if images:
+            if "vision" not in self.llm.capabilities:
+                raise RuntimeError(f"Model {self.llm.model_name} does not support vision")
+            assert isinstance(images, list), f"Images must be a list but got {type(images)}"
+            assert all(isinstance(image, bytes) for image in images), "All images must be bytes"
+            self.messages.append({"role": "user", "content": prompt, "images": images})
+        else:
+            assert isinstance(prompt, str), f"Prompt must be a string but got {type(prompt)}"
+            self.messages.append({"role": "user", "content": prompt})
         response = self.generate()
         self.messages.append(response.message)
 
         # Tool calling loop
         n_steps = 0
         while (tool_call_list := response.message.tool_calls) and (n_steps < self.n_max_steps):
+            if self.verbose: print(f"\nTool calling loop step {1+n_steps}")
             n_steps += 1
             for tool_call in tool_call_list:
                 if function_to_call := self.available_tools.get(tool_call.function.name):
                     if self.verbose:
                         print(f"Calling tool {tool_call.function.name} with arguments {tool_call.function.arguments}")
                     output = function_to_call(**tool_call.function.arguments)
+                    if self.verbose:
+                        print(f"Tool {tool_call.function.name} returned {output}")
                     self.messages.append({'role': 'tool', 'content': str(output), 'tool_name': tool_call.function.name})
                 else:
                     self.messages.append({'role': 'tool', 'content': f"Function {tool_call.function.name} not found", 'tool_name': tool_call.function.name})
@@ -82,6 +99,11 @@ class Agent():
 
 
 if __name__ == "__main__":
-    llm = LLM("llama3.2", default_system_prompt=True)
-    agent = Agent("agent1", llm)
-    print(agent.invoke("Hello my name is Bob and I am 30 years old. My favourite color is blue."))
+
+    llm = LLM("qwen3:4b")
+
+    from base_tools import addition, multiplication
+
+    agent = Agent("agent1", llm, tools=[addition, multiplication], verbose=True, default_system_prompt=True)
+
+    print(agent.invoke("What is (2+8)*3?"))

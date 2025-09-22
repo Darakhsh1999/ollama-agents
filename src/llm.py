@@ -26,7 +26,6 @@ class LLM():
         self.model_name = model_name
         self.client = ollama.Client()
         self.capabilities = ollama.show(model_name).capabilities
-        print(self.capabilities)
 
         # Reasoning
         if "thinking" in self.capabilities:
@@ -87,3 +86,4 @@ if __name__ == "__main__":
 
     llm1 = LLM("llama3.2", use_thinking=True)
     llm2 = LLM("qwen3:4b", use_thinking=True)
+    llm2 = LLM("gemma3", use_thinking=True)

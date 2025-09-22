@@ -55,6 +55,9 @@ def read_file(file_path: str) -> str:
         text = f.read()
     return text[:10000]
 
+def read_images(image_paths: list[str]) -> list[str]:
+    return [read_file(image_path) for image_path in image_paths]
+
 def write_file(file_path: str, text: str) -> None:
     with open(file_path, "w") as f:
         try:
