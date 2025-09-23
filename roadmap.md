@@ -11,7 +11,7 @@
 - [ ] Pre built agents
     - [ ] WritingAgent
     - [X] MathAgent
-    - [ ] CodingAgent
+    - [X] CodingAgent
     - [X] ReActAgent
 - [ ] MCP support
 - [ ] Guard rails
