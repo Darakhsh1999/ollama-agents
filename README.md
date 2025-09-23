@@ -8,20 +8,43 @@ Agentic framework implemented exclusively around Ollama models.
 ### Prebuilt Agent
 
 ```python
-from ollama_agents import Agent
+from llms import LLM
+from prebuilt_agents import CodingAgent
 
-agent = Agent(model="qwen3:4b")
-agent.run("Hello, how are you?")
+# Initialize the LLM
+llm = LLM("qwen3:4b")
+
+# Initialize the prebuilt agent
+coding_agent = CodingAgent(llm, verbose=True)
+
+# Invoke the agent
+output = coding_agent.invoke("Convert the 35 degrees celsius to fahrenheit.")
+
+print(output)
+>>> example output: 95.0
 ```
 
 ### Custom Agent
 
 ```python
-from ollama_agents import Agent
+from llms import LLM
+from agents import Agent
 
-agent = Agent(model="qwen3:4b")
-agent.run("Hello, how are you?")
+# Initialize the LLM
+llm = LLM("qwen3:4b")
+
+# Initialize the custom agent
+agent = Agent(llm, verbose=True)
+
+# Invoke the agent
+output = agent.invoke("Hello, how are you?")
+
+print(output)
 ```
+
+## Quick demo
+
+![Quick demo](assets/quick-demo.gif)
 
 ## 🛠️ Getting Started
 
@@ -31,6 +54,19 @@ agent.run("Hello, how are you?")
 - ollama (see [installation instructions](#installing-ollama))
 - pydantic
 - ipykernel
+
+### Installation
+Setup and installation using `uv`:
+
+Install dependencies:
+```bash
+uv sync
+```
+
+Activate the virtual environment:
+```bash
+source .venv/bin/activate
+```
 
 
 ### Installing Ollama
@@ -45,3 +81,10 @@ agent.run("Hello, how are you?")
 
 ## 📜 License
 This repository is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Roadmap
+
+The core framework features are already implemented. Future plans and roadmap goals are defined in the [Roadmap](ROADMAP.md) file.
+
+
+
