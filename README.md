@@ -1,7 +1,22 @@
 # ollama-agents
-Agentic framework implemented exclusively around Ollama models. 
+
+
+<div style="text-align: center; font-size: 150%; font-weight: bold;">
+Agentic framework implemented exclusively around Ollama models.
+</div>
 
 ![Ollama Agent](assets/ollama-agent.png)
+
+The **core philosophy** of this agentic framework is to provide a simple and easy-to-use interface for building agents. It is built on top of the `ollama-python` SDK and provides a high-level API for building agents.
+
+The core design can be compared to vehicles (cars, boats, airplanes, etc.) where the `LLM` is the engine powering the AI application, `Agent` is the vehicle body acting as the skeleton, `Tools` are the accessories allowing the agent to perform external actions, and `System Prompt` is the destination guiding the agent to the goal.
+
+- You want an agent that can dynamically execute python code for dynamic tasks? then `CodingAgent` is perfect.
+- You want an agent that can *read*, *write* and *edit* files? then `WritingAgent` comes prebuilt with all the necessary tools.
+- You have some python functions that you want to convert to tools allowing your language model to perform external actions? then `ReActAgent` makes it easy to add your tools without needing to worry about the internal tool calling process.
+
+The prebuilt agents inside `prebuilt_agents.py` are perfect for plug and play situations, and if you want more customization, then `Agent` offers a more advanced interface with features.
+
 
 ## 🚀 Quickstart
 
@@ -21,7 +36,7 @@ coding_agent = CodingAgent(llm, verbose=True)
 output = coding_agent.invoke("Convert the 35 degrees celsius to fahrenheit.")
 
 print(output)
->>> example output: 95.0
+# >>> 35 degrees Celsius is equivalent to 95 degrees Fahrenheit.
 ```
 
 ### Custom Agent (Advanced user)
@@ -128,7 +143,7 @@ This repository is licensed under the MIT License - see the [LICENSE](LICENSE) f
 
 ## Roadmap
 
-The core framework features are already implemented. Future plans and roadmap goals are defined in the [Roadmap](ROADMAP.md) file.
+The core agentic framework features are implemented. Future plans and roadmap goals are defined in the [Roadmap](roadmap.md).
 
 
 
