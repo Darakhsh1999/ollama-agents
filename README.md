@@ -9,14 +9,18 @@ Agentic framework implemented exclusively around Ollama models.
 
 The **core philosophy** of this agentic framework is to provide a simple and easy-to-use interface for building agents. It is built on top of the `ollama-python` SDK and provides a high-level API for building agents.
 
-The core design can be compared to vehicles (cars, boats, airplanes, etc.) where the `LLM` is the engine powering the AI application, `Agent` is the vehicle body acting as the skeleton, `Tools` are the accessories allowing the agent to perform external actions, and `System Prompt` is the destination guiding the agent to the goal.
+The core design can be compared to vehicles (cars, boats, airplanes, etc.) where the `LLM` is the engine powering the AI application, `Agent` is the vehicle body acting as the skeleton, `tools` are the accessories allowing the agent to perform external actions, and `system_prompt` is the travel destination guiding the agent to the goal.
 
-- You want an agent that can dynamically execute python code for dynamic tasks? then `CodingAgent` is perfect.
-- You want an agent that can *read*, *write* and *edit* files? then `WritingAgent` comes prebuilt with all the necessary tools.
-- You have some python functions that you want to convert to tools allowing your language model to perform external actions? then `ReActAgent` makes it easy to add your tools without needing to worry about the internal tool calling process.
+- You want an agent that can dynamically execute python code for dynamic tasks in scenarios where it is hard to define specific python functions? then `CodingAgent` is perfect.
+- You want an agent that can *read*, *write* and *edit* files? then `WritingAgent` comes prebuilt with all the necessary I/O tools.
+- You have some set of python functions that you would want to add to your language model to perform external actions? then `ReActAgent` takes your list of tools and takes care of the internal tool calling process for you.
 
-The prebuilt agents inside `prebuilt_agents.py` are perfect for plug and play situations, and if you want more customization, then `Agent` offers a more advanced interface with features.
+The prebuilt agents inside `prebuilt_agents.py` are perfect for plug and play situations, and if you want more customization, then `Agent` offers a more advanced interface with features as shown in the [Custom Agent](#custom-agent-advanced-user) example.
 
+## Quick demo
+Executing `main.py` in the terminal with `verbose=True` will show the internal thought process of the agent. Here is a quick demo of a custom *weather agent*.
+
+![Quick demo](assets/demo.gif)
 
 ## 🚀 Quickstart
 
@@ -101,9 +105,6 @@ if __name__ == "__main__":
     main()
 ```
 
-## Quick demo
-
-![Quick demo](assets/demo.gif)
 
 ## 🛠️ Getting Started
 
