@@ -103,7 +103,7 @@ if __name__ == "__main__":
 
 ## Quick demo
 
-![Quick demo](assets/quick-demo.gif)
+![Quick demo](assets/demo.gif)
 
 ## 🛠️ Getting Started
 
@@ -132,9 +132,14 @@ source .venv/bin/activate
 
 1. Visit the [Ollama website](https://ollama.com/) and follow the installation instructions for your operating system.
 
-2. Once installed, download a Ollama model (e.g., qwen3:4b):
+2. Once installed, download a local model (e.g., qwen3:4b):
    ```bash
    ollama pull qwen3:4b
+   ```
+
+3. Run the model in your terminal:
+   ```bash
+   ollama run qwen3:4b
    ```
 
 
