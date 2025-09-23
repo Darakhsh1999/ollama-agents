@@ -12,7 +12,7 @@
     - [ ] WritingAgent
     - [X] MathAgent
     - [ ] CodingAgent
-    - [ ] ReActAgent
+    - [X] ReActAgent
 - [ ] MCP support
 - [ ] Guard rails
 - [ ] Memory

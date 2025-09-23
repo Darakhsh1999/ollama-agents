@@ -1,16 +1,18 @@
-from tabnanny import verbose
 import tool_groups
 from llm import LLM
 import default_prompts
 from agents import Agent
-
+from typing import Callable
 
 class ReActAgent(Agent):
-    def __init__(self, llm: LLM):
+    def __init__(self, llm: LLM, tools: list[Callable] = None, *args, **kwargs):
         super().__init__(
             agent_name="react_agent",
             llm=llm,
             system_prompt=default_prompts.REACT_AGENT_PROMPT,
+            tools=tools,
+            *args,
+            **kwargs,
         )
 
 class MathAgent(Agent):
