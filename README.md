@@ -112,8 +112,6 @@ if __name__ == "__main__":
 
 - Python 3.12 or higher
 - ollama (see [installation instructions](#installing-ollama))
-- pydantic
-- ipykernel
 
 ### Installation
 Setup and installation using `uv`:
