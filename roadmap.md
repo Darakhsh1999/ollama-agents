@@ -10,7 +10,7 @@
 - [X] Structured outputs
 - [ ] Pre built agents
     - [ ] WritingAgent
-    - [ ] MathAgent
+    - [X] MathAgent
     - [ ] CodingAgent
     - [ ] ReActAgent
 - [ ] MCP support

@@ -6,6 +6,13 @@ MATH_TOOLS = [
     subtraction,
     multiplication,
     division,
+    exponentiation,
+    square_root,
+    sine,
+    cosine,
+    tangent,
+    logarithm,
+    absolute_value,
 ]
 
 FILE_TOOLS = [
