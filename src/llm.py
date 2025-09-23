@@ -1,6 +1,7 @@
 import ollama
-from default_prompts import ASSISTANT_PROMPT
+from pydantic import BaseModel
 from ollama import Options, ChatResponse
+from default_prompts import ASSISTANT_PROMPT
 
 class LLM():
 
@@ -31,7 +32,8 @@ class LLM():
         if "thinking" in self.capabilities:
             self.use_thinking = use_thinking
         else:
-            print(f"Warning: Model {model_name} does not support reasoning. Setting use_thinking to False")
+            if use_thinking:
+                print(f"Warning: Model {model_name} does not support reasoning. Setting use_thinking to False")
             self.use_thinking = False
 
         # Model sampling parmeters
@@ -47,14 +49,15 @@ class LLM():
         )
 
         
-    def generate(self, messages: list[dict[str, str]], tools: list = None) -> ChatResponse:
+    def generate(self, messages: list[dict[str, str]], tools: list = None, structured_output: BaseModel = None) -> ChatResponse:
         """ Invoke the model """
         return self.client.chat(
             model=self.model_name,
             messages=messages,
-            options=self.options,
             tools=tools,
-            think=self.use_thinking,
+            think=False if structured_output else self.use_thinking,
+            format=structured_output.model_json_schema() if structured_output else None,
+            options=self.options,
         )
 
 
