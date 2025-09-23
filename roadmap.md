@@ -1,14 +1,18 @@
+# Roadmap
 
-
-- [ ] LLM class
-    - chat completion [X]
+- [X] LLM class
+    - [X] chat completion [X]
     - multi-turn conversation [X]
     - sampling parameters [X]
-    - multimodality (images)
+    - multimodality (images) [X]
 - [X] Tool calling
 - [X] Agent class
-- [ ] Structured outputs
+- [X] Structured outputs
 - [ ] Pre built agents
+    - [ ] WritingAgent
+    - [ ] MathAgent
+    - [ ] CodingAgent
+    - [ ] ReActAgent
 - [ ] MCP support
 - [ ] Guard rails
 - [ ] Memory
