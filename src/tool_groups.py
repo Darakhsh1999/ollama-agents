@@ -20,4 +20,8 @@ FILE_TOOLS = [
     write_file,
     list_files,
 ]
-    
+
+# Python execution tools (restricted sandbox)
+CODING_TOOLS = [
+    python_run,
+]

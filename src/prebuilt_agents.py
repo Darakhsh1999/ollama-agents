@@ -42,7 +42,7 @@ class CodingAgent(Agent):
         super().__init__(
             agent_name="coding_agent",
             llm=llm,
-            tools=tool_groups.FILE_TOOLS,
+            tools=tool_groups.CODING_TOOLS,
             system_prompt=default_prompts.CODING_AGENT_PROMPT,
             *args,
             **kwargs,
@@ -52,11 +52,11 @@ class CodingAgent(Agent):
 
 if __name__ == "__main__":
 
-    llm = LLM("qwen3:4b", use_thinking=True)
+    llm = LLM("qwen3:4b", use_thinking=False)
 
-    math_agent = MathAgent(llm, verbose=True)
+    coding_agent = CodingAgent(llm, verbose=True)
 
-    print(math_agent.invoke("What is the cos(ln(pi)*sqrt(23)). Answer with 3 decimal places."))
+    print(coding_agent.invoke("Calculate the levenshtein distance between the strings 'hello' and 'hola'."))
 
 
     
