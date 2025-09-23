@@ -1,48 +1,48 @@
 import os
 
-def addition(a: int, b: int) -> int:
+def addition(a: float, b: float) -> float:
     """
-    Return the sum of two integers.
+    Return the sum of two floats.
 
     Args:
-        a (int): The first integer.
-        b (int): The second integer.
+        a (float): The first float.
+        b (float): The second float.
     Returns:
-        int: The sum of a and b.
+        float: The sum of a and b.
     """
     return a + b
 
-def subtraction(a: int, b: int) -> int:
+def subtraction(a: float, b: float) -> float:
     """
-    Return the difference between two integers.
+    Return the difference between two floats.
 
     Args:
-        a (int): The number to subtract from.
-        b (int): The number to subtract.
+        a (float): The float to subtract from.
+        b (float): The float to subtract.
     Returns:
-        int: The result of a minus b.
+        float: The result of a minus b.
     """
     return a - b
 
-def multiplication(a: int, b: int) -> int:
+def multiplication(a: float, b: float) -> float:
     """
-    Return the product of two integers.
+    Return the product of two floats.
 
     Args:
-        a (int): The first integer.
-        b (int): The second integer.
+        a (float): The first float.
+        b (float): The second float.
     Returns:
-        int: The product of a and b.
+        float: The product of a and b.
     """
     return a * b
 
-def division(a: int, b: int) -> float:
+def division(a: float, b: float) -> float:
     """
-    Return the quotient of two integers as a float.
+    Return the quotient of two floats as a float.
 
     Args:
-        a (int): The dividend.
-        b (int): The divisor (must not be zero).
+        a (float): The dividend.
+        b (float): The divisor (must not be zero).
     Returns:
         float: The result of a divided by b.
     Raises:
