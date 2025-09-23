@@ -144,23 +144,122 @@ def absolute_value(a: float) -> float:
 ### File tools ###
 
 def read_file(file_path: str) -> str:
-    with open(file_path, "r") as f:
-        text = f.read()
-    return text[:10000]
+    """
+    Read the content of a text file and return up to the first 10,000 characters.
+
+    Args:
+        file_path (str): The path to the file to read.
+
+    Returns:
+        str: The file content (prefixed with 'File content:') truncated to 10,000 characters.
+             Returns an error message string if reading fails.
+    """
+    try:
+        with open(file_path, "r") as f:
+            text = f.read()
+        return f"File content:\n{text[:10000]}"
+    except Exception as e:
+        return f"Error while reading file: {e}"
 
 def read_images(image_paths: list[str]) -> list[str]:
+    """
+    Read a list of image files as text via `read_file` and return their contents.
+
+    Note: This function uses `read_file` internally and therefore returns text content,
+    which is appropriate if your images are not binary or are being handled as text.
+
+    Args:
+        image_paths (list[str]): List of file paths to read.
+
+    Returns:
+        list[str]: A list of strings with each file's content (or error message).
+    """
     return [read_file(image_path) for image_path in image_paths]
 
-def write_file(file_path: str, text: str) -> None:
-    with open(file_path, "w") as f:
-        try:
+def write_file(file_path: str, text: str) -> str:
+    """
+    Write text content to a file, overwriting any existing content.
+
+    Args:
+        file_path (str): The path to the file to write to.
+        text (str): The text content to write.
+
+    Returns:
+        str: A success message containing the written file path, or an error message if writing fails.
+    """
+    try:
+        with open(file_path, "w") as f:
             f.write(text)
-            return f"File written successfully to {file_path}"
-        except Exception as e:
-            return f"Error writing file: {e}"
+        return f"File content successfully written to path {file_path}"
+    except Exception as e:
+        return f"Error while writing file: {e}"
+
+def append_to_file(file_path: str, text: str) -> str:
+    """
+    Append text content to the end of a file, creating it if it does not exist.
+
+    Args:
+        file_path (str): The path to the file to append to.
+        text (str): The text content to append.
+
+    Returns:
+        str: A success message containing the file path, or an error message if appending fails.
+    """
+    try:
+        with open(file_path, "a") as f:
+            f.write(text)
+        return f"Text successfully appended to file at path {file_path}"
+    except Exception as e:
+        return f"Error while appending to file: {e}"
+
+def edit_file(file_path: str, text: str, insert_at_line: int) -> str:
+    """
+    Insert text into a file at a specific zero-based line index.
+
+    Args:
+        file_path (str): The path to the file to edit.
+        text (str): The text to insert.
+        insert_at_line (int): The zero-based line index at which to insert the text.
+
+    Returns:
+        str: A success message containing the file path and insertion line, or an error message if editing fails.
+    """
+    try:
+        with open(file_path, "r") as f:
+            lines = f.readlines()
+        lines.insert(insert_at_line, text)
+        with open(file_path, "w") as f:
+            f.writelines(lines)
+        return f"Text successfully inserted into file at path {file_path} at line {insert_at_line}"
+    except Exception as e:
+        return f"Error while editing file: {e}"
+
 
 def list_files(directory: str) -> list[str]:
-    return os.listdir(directory)
+    """
+    List files in a directory with basic metadata for each item.
+
+    Note: The return type is a list of dictionaries containing 'name', 'is_dir', and 'size'.
+
+    Args:
+        directory (str): The directory path to list.
+
+    Returns:
+        list[dict] | str: A list of dictionaries with keys:
+            - name (str): File or directory name.
+            - is_dir (bool): True if the item is a directory.
+            - size (int): File size in bytes (0 for directories on some systems).
+        Returns an error message string if listing fails.
+    """
+    try:
+        items = []
+        for file in os.listdir(directory):
+            items.append({"name": file, "is_dir": os.path.isdir(file), "size": os.path.getsize(file)})
+        return items
+    except Exception as e:
+        return f"Error while listing files: {e}"
+
+
 
 ### Python interpreter tools ###
 

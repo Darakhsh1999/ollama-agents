@@ -49,7 +49,6 @@ class CodingAgent(Agent):
         )
     
 
-
 if __name__ == "__main__":
 
     llm = LLM("qwen3:4b", use_thinking=False)

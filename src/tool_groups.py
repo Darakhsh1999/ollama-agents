@@ -17,7 +17,10 @@ MATH_TOOLS = [
 
 FILE_TOOLS = [
     read_file,
+    read_images,
     write_file,
+    append_to_file,
+    edit_file,
     list_files,
 ]
 
